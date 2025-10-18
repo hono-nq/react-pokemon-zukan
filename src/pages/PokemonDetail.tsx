@@ -33,20 +33,20 @@ const PokemonDetail: React.FC = () => {
         <h1 className="mt-4 text-2xl font-bold">{data.japaneseName} (#{data.id})</h1>
         <p className="mt-2 text-justify">{data.description}</p>
         <div className="grid grid-cols-2 gap-2">
-          {data?.types?.map((type) => (
+          {data?.types?.map((type: string) => (
             <PokemonTypeLabel key={type} type={type} />
           ))}
         </div>
           <span className="w-fit whitespace-nowrap text-right">特性</span>
         <div className="flex gap-2">
           <div className="grid grid-cols-2 gap-2 w-full">
-            {data?.abilities?.map((ability) => (
+            {data?.abilities?.map((ability: string) => (
               <span key={ability}>{ability}</span>
             ))}
           </div>
         </div>
         <div className="mt-4 grid grid-cols-1 gap-x-2 w-full">
-          {data?.baseStats?.map((stat) => (
+          {data?.baseStats?.map((stat: { name: string; value: number }) => (
             <div key={stat.name} className="flex items-center">
               <span className="w-24 text-right mr-2">{stat.name}</span>
               <div className="flex-1 bg-gray-200 rounded-full h-4">
@@ -64,10 +64,10 @@ const PokemonDetail: React.FC = () => {
             <div className="flex-1 bg-gray-200 rounded-full h-4">
               <div
                 className="bg-blue-600 rounded-full h-4"
-                style={{ width: `${(data?.baseStats?.reduce((sum, stat) => sum + stat.value, 0) / 780) * 100}%` }}
+                style={{ width: `${(data?.baseStats?.reduce((sum: number, stat: { name: string; value: number }) => sum + stat.value, 0) / 780) * 100}%` }}
               ></div>
             </div>
-            <span className="ml-2 w-8">{data?.baseStats?.reduce((sum, stat) => sum + stat.value, 0)}</span>
+            <span className="ml-2 w-8">{data?.baseStats?.reduce((sum: number, stat: { name: string; value: number }) => sum + stat.value, 0)}</span>
           </div>
         </div>
       </div>

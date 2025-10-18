@@ -19,7 +19,7 @@ const PokemonList: React.FC = () => {
     queryKey: [apiQueryKeys.pokemon.list()],
     queryFn: ({ pageParam = 0 }) => fetchPokemonListWithJapaneseNames(pageParam),
     initialPageParam: 0,
-    getNextPageParam: (lastPage, pages) => {
+    getNextPageParam: (lastPage: { next: string | null }, pages: unknown[]) => {
       if (lastPage.next) {
         return pages.length * 20;
       }
@@ -52,7 +52,7 @@ const PokemonList: React.FC = () => {
   return (
     <div className="p-4">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-        {data?.pages.map((page) =>
+        {data?.pages.map((page: { results: PokemonWithJapaneseName[] }) =>
           page.results.map((pokemon: PokemonWithJapaneseName) => (
             <PokemonCard key={pokemon.name} pokemon={pokemon} />
           ))
